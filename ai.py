@@ -33,13 +33,15 @@ def generate_answer(prompt_usuario):
         "role": "user",
         "content": prompt_usuario,
     })
-    
+    text_final = ''
     try:
         chat_completion = client.chat.completions.create(
             messages=prompt,
             model="gpt-4-turbo",
         )   
-        return chat_completion.choices[0].message.content
+        text_final = chat_completion.choices[0].message.content
     except Exception as e:
         print(f"ERROR GENERATING ANSWER: {e}")
-        return "{}"
+        text_final = "{}"
+    print(":::::::::::TExTO GENERADO:::::::::::\n",text_final,"\n::::::::::::::::")
+    return text_final
